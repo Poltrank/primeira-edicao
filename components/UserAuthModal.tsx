@@ -33,7 +33,17 @@ const UserAuthModal: React.FC<UserAuthModalProps> = ({ onClose, onLogin }) => {
     const cleanPhone = handleCleanWhatsapp(whatsapp);
     
     // Simulate API/DB Logic
-    const storedUsers = JSON.parse(localStorage.getItem('ecoDriveUsers') || '[]');
+    let storedUsers: User[] = [];
+    try {
+        const saved = localStorage.getItem('ecoDriveUsers');
+        if (saved) {
+            storedUsers = JSON.parse(saved);
+            if (!Array.isArray(storedUsers)) storedUsers = [];
+        }
+    } catch (err) {
+        console.error("Failed to parse users", err);
+        storedUsers = [];
+    }
     
     if (isRegistering) {
         // Check if exists
