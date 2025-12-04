@@ -38,8 +38,9 @@ function App() {
     if (savedFleet) {
       try {
         const parsedFleet = JSON.parse(savedFleet);
-        if (parsedFleet && typeof parsedFleet === 'object') {
-            setFleetImages(parsedFleet);
+        if (parsedFleet && typeof parsedFleet === 'object' && parsedFleet !== null) {
+            // Merge with defaults to prevent missing keys
+            setFleetImages(prev => ({ ...prev, ...parsedFleet }));
         }
       } catch (e) { console.error("Error loading fleet images", e); }
     }
