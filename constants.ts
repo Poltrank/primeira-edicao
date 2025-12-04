@@ -14,5 +14,5 @@ export const INITIAL_ROUTES: Route[] = [
   { id: '7', destination: 'Outras Cidades', price: 'Sob Consulta', note: CONTACT_NOTE },
 ];
 
-export const AGENCY_NAME = "EcoDrive Agency";
+export const AGENCY_NAME = "Motorista Particular Jaraguá do Sul";
 export const LOCATION = "Jaraguá do Sul, SC";
