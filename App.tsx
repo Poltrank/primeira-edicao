@@ -37,14 +37,24 @@ function App() {
     const savedFleet = localStorage.getItem('ecoDriveFleetImages');
     if (savedFleet) {
       try {
-        setFleetImages(JSON.parse(savedFleet));
-      } catch (e) { console.error(e); }
+        const parsedFleet = JSON.parse(savedFleet);
+        if (parsedFleet && typeof parsedFleet === 'object') {
+            setFleetImages(parsedFleet);
+        }
+      } catch (e) { console.error("Error loading fleet images", e); }
     }
 
-    // Load Bookings
+    // Load Bookings safely
     const savedBookings = localStorage.getItem('ecoDriveBookings');
     if (savedBookings) {
-        setBookings(JSON.parse(savedBookings));
+        try {
+            const parsedBookings = JSON.parse(savedBookings);
+            if (Array.isArray(parsedBookings)) {
+                setBookings(parsedBookings);
+            }
+        } catch (e) {
+            console.error("Error loading bookings", e);
+        }
     }
     
     // Check Session (User persistence)
